@@ -75,3 +75,22 @@ Hortizontal Scaling: distributing the load across multiple smaller machines.
 
 Elastic System: when computing resources can be automatically be added when detecting a load increase.
 
+### Maintainability
+
+The majority of the cost of software is not in its initial development, but in its on-going maintenance.
+
+- Operability: make it easy for operations team to keep the system running smoothly.
+- Simplicity: make it easy for new engineers to understand the system.
+- Evolvability: make it easy for engineers to make changes to the system in the future, adapting it for unanticipated use cases as requirements change.
+
+**Operability: Making Life Easy For Operations**
+
+Operations team is responsible for ensuring the system runs smoothly and resolve issues when they arise. Good operability means making routine tasks easy, allowing the operations team to focus their efforts on high-value activities.
+
+- Good monitoring on system health
+- Good support for automation and integration tools
+- Good documentation on how the system behaves
+
+**Simplicity: Managing Complexity**
+
+Complexity grows and become difficult to understand as project gets larger. 
