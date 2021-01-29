@@ -93,4 +93,8 @@ Operations team is responsible for ensuring the system runs smoothly and resolve
 
 **Simplicity: Managing Complexity**
 
-Complexity grows and become difficult to understand as project gets larger. 
+Complexity grows and become difficult to understand as project gets larger. Manage complexity with good abstractions. Abstractions hide implementation details and encourage code reuse. Ulimately, the improve the quality of the software.
+
+**Evolvability: Making Change Easy**
+
+System requirements are constantly changing. *Evolvability*, or how easily a system can be modified, is closely linked to its simplicity and its abstractions. 
