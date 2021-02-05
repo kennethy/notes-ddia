@@ -98,3 +98,48 @@ Complexity grows and become difficult to understand as project gets larger. Mana
 **Evolvability: Making Change Easy**
 
 System requirements are constantly changing. *Evolvability*, or how easily a system can be modified, is closely linked to its simplicity and its abstractions. 
+
+## Chapter 2 - Data Models and Query Languages
+
+Most applications are built by layering multiple data models. From application level data structures, database level representations (JSON/XML/Graph/Relational), bytes in memory, and finally bytes in terms of electrical currents, and etc. Each layer hides the complexity below it.
+
+### Relational Model Versus Document Model
+
+In the relational model, data is organized into *relations/tables*, and each relation is an unordered collection *tuples/rows.* Its roots lie in *transaction processing* (records entry) and *batch processing (reporting).* Its goal was to hide the implementation detail behind a cleaner interface.
+
+**The Birth of NoSQL**
+
+Not Only SQL (NoSQL) is driven by:
+- specialized query operations that are not well supported by the relational model
+- desire for a more dynamic and expressive data model
+
+**The Object-Relational Mismatch**
+
+Most applications are done in object-oriented programming. It often requires a translation layer between the objects in the application code and the database model of tables, rows, and columns. (also known as *impedance mismatch.*)
+
+Object-relational mapping (ORM) frameworks reduce the amount of boilerplate but they can't completely hide the differences between the two models.
+
+Locality is an optimization strategy that group data that are likely to be used together. JSON, for instance, has better locality than typical multi-table schema.
+
+**Many-to-One and Many-to-Many Relationships**
+
+Reference data by ID to eliminate duplications. Removing duplicated information is the key behind database *normalization.*
+
+### Relational Versus Document Database Today
+
+Document data model provides schema flexibility, and models applications better, whereas relationship model provides better support for joins, and many-to-one and many-to-many relationships.
+
+**Which data model leads to simpler application code?**
+
+*Shredding* (splitting data into tables in the relational model) can often be cumbersome.  Use document model if the application has a document-like structure (i.e. a tree of one-to-many relationships, and the tree is loaded at once). 
+
+Document model have tradeoffs. For example, nested item can only be referenced through access like, like "the second item in the list of positions for user 251."
+
+**Schema flexibility in the document model**
+
+There are no guarantees on what fields the documents may contain when arbitrary keys and values can be stored.
+
+**Schema-on-read**: the structure of the data is implicit, and only interpreted when the data is read.
+
+**Schema-on-write:** schema is explicit and the database ensures all written data conforms to it.
+
