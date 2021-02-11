@@ -139,7 +139,43 @@ Document model have tradeoffs. For example, nested item can only be referenced t
 
 There are no guarantees on what fields the documents may contain when arbitrary keys and values can be stored.
 
-**Schema-on-read**: the structure of the data is implicit, and only interpreted when the data is read.
+Schema-on-read: the structure of the data is implicit, and only interpreted when the data is read.
 
-**Schema-on-write:** schema is explicit and the database ensures all written data conforms to it.
+Schema-on-write: schema is explicit and the database ensures all written data conforms to it.
+
+**Data locality for queries**
+
+Locality is useful only if large parts of the document are used at the same time.
+
+### Query Languages for Data
+
+Declarative query language, like SQL, specify the pattern of the data we want — what conditions the data results must meet, and how you want the data to be transformed — but not how to achieve the goal, and it's up to the database system's query optimizer to decide how to do it.
+
+It also have a better chance of getting faster in parallel execution because it specifies only the pattern of the results, not the algorithm that is used to determine the results.
+
+### Decarative Queries on the Web
+
+The advantages of declarative query languages are not limited to just databases. For example, HTML and CSS.
+
+### MapReduce Querying
+
+Logic of the query expressed based on the *map* function and the reduce function. The two functions must be *pure. They only use the data that is passed to them as input, and cannot perform additional databases queries.
+
+### Graph-Like Data Models
+
+It's often more natural to start modelling data as a graph when it becomes complex.
+
+## Chapter 3 - Storage and Retrieval
+
+### Data Structures That Power Your Database
+
+The basic idea is that data is appended to a log-structured file, and the index associated to the key/value is the byte offset relative to the log file. Log file is splitted into smaller segments, and compaction is performed.
+
+*Compaction* is when duplicated keys in the log are thrown away, and only the most recent update for each key is retained. Smaller segments would be merged as compactions make them smaller. The merging and compaction of segments is often done in a separate background thread.
+
+Read request uses the old compaction until merge/compaction is complete. Old segments are deleted once the process completes. Writes are done to latest segments.
+
+### Hash Indexes
+
+Each segment maintains its own in-memory hash table of key to file offsets. Index lookups start from the latest segment.
 
