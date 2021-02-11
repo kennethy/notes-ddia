@@ -179,3 +179,14 @@ Read request uses the old compaction until merge/compaction is complete. Old seg
 
 Each segment maintains its own in-memory hash table of key to file offsets. Index lookups start from the latest segment.
 
+Implementation details:
+-  In practice, binary format is used.
+-  Special deletion record (*tomberstone*) is appended to delete a key, discarded during the merge process.
+-  Snapshot of each segment's hash map is stored on disk for fast crash discovery.
+-  Only one writer thread is used, and data file segments are append-only/immutable.
+-  Append-only writes as sequential writes are generally faster than random writes.
+
+Limitations:
+- hash table must fit in memory
+- range queries are inefficient as each key needs to be looked up individually
+
