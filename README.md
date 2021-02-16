@@ -206,3 +206,12 @@ Advantages over log segments with hash indexes:
 - Serve a read request by first looking up the key in memtable, then in the most recent on-disk segment.
 - Run merging and compaction process in the background from time-to-time.
 
+Keep a separate append-only write-to-disk log for recovery in case of crash. Storage engines that are based on the principle of merging and compacting sorted files are often called LSM (*log-structured merge-tree*) storage engines.
+
+**Performance Optimizations**
+
+Lookup may be slow for non-existent key (lookup from memtable to on-disk segments). Optimize by using *boom filters*.
+
+Compaction/Merge Strategies:
+- Size-tiered: newer and smaller SSTables are successively merged into older and larger SSTables.
+- Leveled-tiered: the key range is split up into smaller SSTables and older data is moved into separate "levels", which allows the compaction to proceed more incrementally and use less disk space. 
