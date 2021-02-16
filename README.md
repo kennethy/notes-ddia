@@ -190,3 +190,19 @@ Limitations:
 - hash table must fit in memory
 - range queries are inefficient as each key needs to be looked up individually
 
+### SSTables and LSM-Trees
+
+Sequence of key-value pairs is sorted by key. This format is is called *Sorted String Table.*
+
+Advantages over log segments with hash indexes:
+- Simple and efficient merges similar to merge-sort algorithm.
+- Not all keys need to be stored in memory.
+- Reduces the I/O bandwidth use through block compression.
+
+**Constructing and maintaining SSTables**
+
+- Incoming writes are added to in-memory balaned tree data structure (memtable).
+- Memtables written to disk when its size get to certain threshold.
+- Serve a read request by first looking up the key in memtable, then in the most recent on-disk segment.
+- Run merging and compaction process in the background from time-to-time.
+
