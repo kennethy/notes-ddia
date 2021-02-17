@@ -216,7 +216,7 @@ Compaction/Merge Strategies:
 - Size-tiered: newer and smaller SSTables are successively merged into older and larger SSTables.
 - Leveled-tiered: the key range is split up into smaller SSTables and older data is moved into separate "levels", which allows the compaction to proceed more incrementally and use less disk space. 
 
-**B-Trees**
+### B-Trees
 
 Similar to SSTables, B-trees keep key-value pairs sorted by key. It breaks the database down into fixed-size *blocks* or *pages*, traditionally 4 KB in size, and read or write one page at a time.
 
@@ -229,3 +229,27 @@ To update a key, the page containing the value of the key is looked up and the p
 To insert a key, it first finds the page whose range encompasses the new key and it will be added to the page. The page get split in half if it exceeds the limit size.
 
 The tree is kept balanced for all of its operations.
+
+**Making B-trees reliable**
+
+The basic underlying write operation of a B-tree requires overwriting a page on disk with new data.
+
+To make the databsae resilient to crashes, a *write-ahead-log* (WAL, aka *redo log*), is an append-only file to whcih every B-tree modification must be written before it can be applied to the pages of the tree itself.
+
+### Comparing B-Trees and LSM-Trees
+
+Rule of thumb: LSM-trees are typicall faster for writes, whereas B-trees are though to be faster for reads. Slower reads on LSM-trees because multiple data structures and SSTables need to be checked. Slower writes on B-trees because both the WAL and the page need to be updated.
+
+**Advantages of LSM-Trees**
+
+Write amplication: one write to the database resulting in multiple writes to the disk over the course of the database's lifetime.
+
+- typically sustain higher write throughput than B-trees because lower write amplification (sequential writes.)
+- can be compressed better since B-trees could leave some disk space unused due to fragmentation (splitted page with unused space)
+
+**Downsides of LSM-Trees**
+
+- compaction could interfere with the performance of ongoing reads and writes.
+- due to the nature of having duplicate keys in multiple segments. B-trees offer stronger transactional semantics.
+
+
