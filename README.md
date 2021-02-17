@@ -215,3 +215,17 @@ Lookup may be slow for non-existent key (lookup from memtable to on-disk segment
 Compaction/Merge Strategies:
 - Size-tiered: newer and smaller SSTables are successively merged into older and larger SSTables.
 - Leveled-tiered: the key range is split up into smaller SSTables and older data is moved into separate "levels", which allows the compaction to proceed more incrementally and use less disk space. 
+
+**B-Trees**
+
+Similar to SSTables, B-trees keep key-value pairs sorted by key. It breaks the database down into fixed-size *blocks* or *pages*, traditionally 4 KB in size, and read or write one page at a time.
+
+Each page is identified using an address/location (on disk). Pages use the addresses to reference each other. One page is designated as the root, and a page contains several keys and references to child pages. The leaf page contains the value for each key or contains references to the pages where the value can be found.
+
+*Branching factor* refers to the number of references on a page.
+
+To update a key, the page containing the value of the key is looked up and the page found will be updated in place. 
+
+To insert a key, it first finds the page whose range encompasses the new key and it will be added to the page. The page get split in half if it exceeds the limit size.
+
+The tree is kept balanced for all of its operations.
