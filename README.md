@@ -252,4 +252,24 @@ Write amplication: one write to the database resulting in multiple writes to the
 - compaction could interfere with the performance of ongoing reads and writes.
 - due to the nature of having duplicate keys in multiple segments. B-trees offer stronger transactional semantics.
 
+### Other Indexing Structures
 
+Primary key: uniquely identifies one row in a relational table, or one document in a document database, or one vertex in a graph database.
+
+**Storing values within the index**
+
+Heap file: reference to the row stored elsewhere.
+
+Clustered index: when the row is stored directly with the index.
+
+Covering index (index with included columns): stores some of a table's columns with the index.
+
+### Transaction Processing or Analytics
+
+| Property |  Transaction Processing Systems  |  Analytic Systems (OLAP)  |
+| --- | --- | --- |
+| Main read pattern | small # of record per query, fetched by key | aggregate over large number of records |
+| Main write pattern | random-access, low-latency writes from user input | bulk import or event stream |
+| used by | end user/customer | internal analyst |
+| what data represents | latest state of data | history of events that happened over time |
+| dataset size | gigabytes to terabytes | terabytes to petabytes |
