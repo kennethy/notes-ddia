@@ -273,3 +273,18 @@ Covering index (index with included columns): stores some of a table's columns w
 | used by | end user/customer | internal analyst |
 | what data represents | latest state of data | history of events that happened over time |
 | dataset size | gigabytes to terabytes | terabytes to petabytes |
+
+**Data Warehousing**
+
+A data warehouse is a separate database that analysts can query without affecting OLTP operations. It's a read-only copy of the data in all the various OLTP systems in the company. Data is dumped periodically into the data warehouse.
+
+**The divergence between OLTP databases and data warehouses**
+
+The two databases are different internally and are optimized for different purposes.
+
+### Stars and Snowflakes: Schemas for Analytics
+
+Data warehouses are used in a formulaic style, known as *star schema* or *dimension modeling*.
+
+Fact table: represents an event, with columns (foreign key references to dimension tables) that represent the who, what, when, where, how, and why.
+
