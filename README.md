@@ -296,3 +296,18 @@ In most OLTP databases, storage is laid out in a row-oriented fashion: all the v
 
 Column-oriented storage: instead of storing all values from one row together, store all the values from each column instead. The order of the column values are ordered based on the order of their corresponding rows.
 
+**Column Compression**
+
+Column value sequence tend to be repetitive, and we can apply compression to reduce the demands on disk throughput. One such technique is to use bitmap-encoding (page 99).
+
+### Sort Order in Column Storage
+
+All column values will be sorted together for row retrieval.
+
+The first sort key will be decided based on common queries.
+
+Sorted order also help with compression of columns, since sorted column values would have repeated values.
+
+**Several different sort orders**
+
+Data needs to be replicated to multiple machines anyway, take advantage of this fact and store data in different orders.
