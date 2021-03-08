@@ -284,7 +284,15 @@ The two databases are different internally and are optimized for different purpo
 
 ### Stars and Snowflakes: Schemas for Analytics
 
-Data warehouses are used in a formulaic style, known as *star schema* or *dimension modeling*.
+Data warehouses are used in a formulaic style, known as *star schema* or *dimension modeling*. The name "star schema" comes from the fact that when the table relationships are visualized, the fact table is in the middle, surrounded by its dimension tables; the connections to these tables are like the rays of a star.
 
 Fact table: represents an event, with columns (foreign key references to dimension tables) that represent the who, what, when, where, how, and why.
+
+Snowflake schema: where dimensions are further broken down into subdimensions.
+
+### Column-Oriented Storage
+
+In most OLTP databases, storage is laid out in a row-oriented fashion: all the values from one row of a table are stored next to each other. All attributes on a row will need to be loaded as well. (load from disk into memory, and apply filter)
+
+Column-oriented storage: instead of storing all values from one row together, store all the values from each column instead. The order of the column values are ordered based on the order of their corresponding rows.
 
