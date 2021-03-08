@@ -311,3 +311,9 @@ Sorted order also help with compression of columns, since sorted column values w
 **Several different sort orders**
 
 Data needs to be replicated to multiple machines anyway, take advantage of this fact and store data in different orders.
+
+**Aggregation: Data Cubes and Materialized Views**
+
+Virtual view: just a shortcut for writing queries
+Materialized View: actual copy of the query results. Useful in read-heavy data warehouses.
+
