@@ -330,3 +330,5 @@ Materialized View: actual copy of the query results. Useful in read-heavy data w
 2. Thrift (pg. 118/119)
 3. Protobufs (pg. 120)
 4. Avro (pg. 123)
+
+**Interface Schema Language:** schema that describes the data
