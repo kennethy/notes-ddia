@@ -317,3 +317,16 @@ Data needs to be replicated to multiple machines anyway, take advantage of this 
 Virtual view: just a shortcut for writing queries
 Materialized View: actual copy of the query results. Useful in read-heavy data warehouses.
 
+## Chapter 4 - Encoding and Evolution
+
+**Backward compatibility:** newer code can read data that was written by older code.
+
+**Forward compatibility:** older code ran read data that was written by newer code.
+
+**Encoding:** Translation from the in-memory representation to a byte sequence. The reverse is decoding.
+
+**Binary Encoding Libraries:**
+1. MessagePack (pg. 117)
+2. Thrift (pg. 118/119)
+3. Protobufs (pg. 120)
+4. Avro (pg. 123)
